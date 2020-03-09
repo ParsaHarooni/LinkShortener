@@ -22,8 +22,16 @@ class TestLogin(TestCase):
 
     def test_login_with_invalid_credential(self):
         """
-        This test is for checking that is not logged in with incorrect info
+        This test is for checking that is not logged in with incorrect credentials
         Should return 400 as response
         """
         resp = self.client.post(LOGIN_URL, data=dict(username="false", password="false"))
+        self.assertEqual(resp.status_code, status.HTTP_400_BAD_REQUEST)
+
+    def test_login_credential_not_provided(self):
+        """
+        This test is for checking if user is logged in if credentials are not provided
+        Should return 400 as response
+        """
+        resp = self.client.post(LOGIN_URL, data=dict())
         self.assertEqual(resp.status_code, status.HTTP_400_BAD_REQUEST)
