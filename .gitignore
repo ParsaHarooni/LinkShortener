@@ -127,3 +127,9 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+
+# my files
+venv
+linkshortener/db.sqlite3
+linkshortener/.idea/
