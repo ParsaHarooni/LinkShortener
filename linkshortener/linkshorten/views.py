@@ -3,8 +3,10 @@ from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
-
 from linkshorten.models import Link
+import redis
+
+redis_db = redis.Redis()
 
 
 class ShortenLink(APIView):
@@ -19,7 +21,8 @@ class ShortenLink(APIView):
         url_hash = data.get("hash")
         try:
             shorten_url = Link.shorten_link(url=url, user=request.user, url_hash=url_hash)
-            resp = dict(shorten_url=f"http://test.com/{shorten_url.hash}")
+            resp = dict(shorten_url=f"http://localhost:8000/r/{shorten_url.hash}/")
+            redis_db.set(shorten_url.hash, url)
             return Response(status=status.HTTP_201_CREATED, data=resp)
         except IntegrityError:
             resp = dict(message="This hash already exists.")

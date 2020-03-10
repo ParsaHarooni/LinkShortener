@@ -1,6 +1,7 @@
 from django.urls import path, include
 from authentication import urls as authentication_urls
 from linkshorten import urls as shorten_urls
+from redirect import urls as redirect_urls
 
 api_urlpatterns = [
     path('auth/', include(authentication_urls)),
@@ -9,4 +10,5 @@ api_urlpatterns = [
 
 urlpatterns = [
     path('api/', include(api_urlpatterns)),
+    path('r/', include(redirect_urls))
 ]
