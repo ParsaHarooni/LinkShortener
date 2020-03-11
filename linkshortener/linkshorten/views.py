@@ -21,7 +21,7 @@ class ShortenLink(APIView):
         url_hash = data.get("hash")
         try:
             shorten_url = Link.shorten_link(url=url, user=request.user, url_hash=url_hash)
-            resp = dict(shorten_url=f"http://localhost:8000/r/{shorten_url.hash}/")
+            resp = dict(shorten_url=f"http://localhost:8000/r/{shorten_url.hash}/", hash=shorten_url.hash)
             redis_db.set(shorten_url.hash, url)
             return Response(status=status.HTTP_201_CREATED, data=resp)
         except IntegrityError:
