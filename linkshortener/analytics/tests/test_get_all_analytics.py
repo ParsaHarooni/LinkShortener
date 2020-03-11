@@ -25,6 +25,10 @@ class TestGetAllAnalytics(TestCase):
         self.api_client.force_authenticate(self.user)
 
     def test_get_analytics(self):
+        """
+        Test to check if analytics returns the general analytics
+        Should return 200
+        """
         shorten_resp = self.api_client.post(SHORTEN_URL, data=dict(url="http://test.com")).json()
         url_hash = shorten_resp['hash']
         shorten_url = shorten_resp['shorten_url']
@@ -32,4 +36,4 @@ class TestGetAllAnalytics(TestCase):
             self.client.get(shorten_url, HTTP_USER_AGENT=DESKTOP_USER_AGENT)
             self.client.get(shorten_url, HTTP_USER_AGENT=ANDROID_USER_AGENT)
         resp = self.api_client.get(GET_ALL_URL, data=dict(hash=url_hash))
-        self.assertEqual(resp.status_code, 200)
+        self.assertEqual(resp.status_code, status.HTTP_200_OK)

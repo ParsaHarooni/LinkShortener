@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'authentication',
     'linkshorten',
     'redirect',
-    'django_user_agents'
+    'django_user_agents',
+    'drf_yasg'
 ]
 
 MIDDLEWARE = [
