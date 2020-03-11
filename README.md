@@ -14,6 +14,6 @@ Thanks for the opportunity :)
 
 ## TODO
 
-[ ] - Complete Docs
-[ ] - Add time based analytics
-[ ] - Get analytics async using Celery and Celery Beats
+- [ ] Complete Docs
+- [ ] Add time based analytics
+- [ ] Get analytics async using Celery and Celery Beats
